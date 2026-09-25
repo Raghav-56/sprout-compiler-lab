@@ -1,0 +1,9 @@
+{
+  "name": "sprout-compiler-lab-ui",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "bun build ./lab/web/app.js --outdir ./lab/web/dist --target browser --minify",
+    "test": "bun test ./lab/web/model.test.js"
+  }
+}

@@ -1,0 +1,9 @@
+/target/
+/.lab/
+__pycache__/
+*.pyc
+.DS_Store
+/.venv/
+/.uv-cache/
+/lab/web/dist/
+/course-labs/bin/

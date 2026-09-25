@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b1117">
+  <title>Sprout compiler lab</title>
+  <link rel="stylesheet" href="/style.css">
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <div class="shell">
+    <aside class="sidebar" aria-label="Lab navigation">
+      <div class="brand">
+        <span class="brand-mark" aria-hidden="true">S</span>
+        <div>
+          <strong>Sprout</strong>
+          <span>compiler lab</span>
+        </div>
+      </div>
+      <div class="progress-card">
+        <p class="eyebrow">Your progress</p>
+        <strong id="progress-count">0 of 7 units</strong>
+        <div class="progress-track" role="progressbar" aria-label="Completed units" aria-valuemin="0" aria-valuemax="7" aria-valuenow="0" id="progress-track">
+          <span id="progress-fill"></span>
+        </div>
+        <p>Saved on this server in <code>.lab/progress.json</code>.</p>
+      </div>
+      <nav aria-label="Units">
+        <p class="nav-label">The build</p>
+        <div id="unit-list"></div>
+      </nav>
+      <div class="sidebar-footer">
+        <a href="https://github.com/Raghav-56/sprout-compiler-lab/blob/main/PROJECT_PLAN.md" target="_blank" rel="noopener">Full project plan <span aria-hidden="true">↗</span></a>
+        <a href="/CONTRACT.md" target="_blank" rel="noopener">Command contract <span aria-hidden="true">↗</span></a>
+      </div>
+    </aside>
+
+    <main id="main">
+      <div class="topbar">
+        <span class="topbar-label">Learn by building</span>
+        <span class="server-tag"><span class="live-dot" aria-hidden="true"></span> Local lab</span>
+      </div>
+      <div class="content">
+        <header class="unit-header">
+          <div class="unit-header-line">
+            <p class="eyebrow" id="unit-number">Unit 01 / 07</p>
+            <span id="unit-state" class="state-pill">Ready to start</span>
+          </div>
+          <h1 id="unit-title">Loading your lab…</h1>
+          <p class="lead" id="unit-summary"></p>
+        </header>
+
+        <section class="result-banner" aria-labelledby="result-title">
+          <div class="section-icon" aria-hidden="true">↗</div>
+          <div>
+            <p class="eyebrow" id="result-title">What you will have</p>
+            <p id="unit-result"></p>
+          </div>
+        </section>
+
+        <div class="section-grid">
+          <section class="panel" aria-labelledby="read-title">
+            <div class="panel-head">
+              <span class="step-number">01</span>
+              <div>
+                <p class="eyebrow">Get your bearings</p>
+                <h2 id="read-title">Read</h2>
+              </div>
+            </div>
+            <div id="read-list" class="resource-list"></div>
+          </section>
+
+          <section class="panel" aria-labelledby="do-title">
+            <div class="panel-head">
+              <span class="step-number">02</span>
+              <div>
+                <p class="eyebrow">Work in your editor</p>
+                <h2 id="do-title">Build</h2>
+              </div>
+            </div>
+            <p class="helper">Tick a task after you finish it. The check below verifies the parts it can run.</p>
+            <div id="task-list" class="task-list"></div>
+          </section>
+        </div>
+
+        <section class="panel check-panel" aria-labelledby="check-title">
+          <div class="panel-head">
+            <span class="step-number">03</span>
+            <div>
+              <p class="eyebrow">See what works</p>
+              <h2 id="check-title">Check your work</h2>
+            </div>
+          </div>
+          <p id="check-description" class="helper"></p>
+          <div class="command-bar">
+            <code id="check-command"></code>
+            <button id="copy-command" class="subtle-button" type="button" aria-label="Copy check command">Copy</button>
+          </div>
+          <div class="check-actions">
+            <button id="run-check" class="primary-button" type="button">Run unit check</button>
+            <button id="run-native" class="secondary-button hidden" type="button">Run native check</button>
+            <span id="check-time" class="check-time"></span>
+          </div>
+          <p id="message" class="message" role="status" aria-live="polite"></p>
+          <div id="check-results" class="check-results" aria-live="polite"></div>
+        </section>
+        <div class="bottom-nav">
+          <button id="previous-unit" class="secondary-button" type="button">Previous unit</button>
+          <button id="next-unit" class="secondary-button" type="button">Next unit</button>
+        </div>
+      </div>
+    </main>
+  </div>
+</body>
+</html>

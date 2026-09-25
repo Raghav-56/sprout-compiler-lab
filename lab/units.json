@@ -1,0 +1,123 @@
+[
+  {
+    "id": 1,
+    "title": "Map the compiler",
+    "summary": "Define Sprout before implementing it.",
+    "result": "A language note and a phase map you can use when a later unit gets confusing.",
+    "read": [
+      {"label": "Project plan", "url": "https://github.com/Raghav-56/sprout-compiler-lab/blob/main/PROJECT_PLAN.md", "why": "See the complete language and the seven-unit route."},
+      {"label": "LLVM Kaleidoscope introduction", "url": "https://llvm.org/docs/tutorial/MyFirstLanguageFrontend/", "why": "See how a small language grows one compiler stage at a time."}
+    ],
+    "steps": [
+      {"id": "language", "text": "Replace every TODO in work/01-language.md. Define types, scope, precedence, returns, and errors."},
+      {"id": "pipeline", "text": "Replace every TODO in work/01-pipeline.md. Name each stage's input, output, and one error."},
+      {"id": "trace", "text": "Trace 2 + 3 * 4 from characters to result without looking at notes."}
+    ],
+    "try": "uv run python lab.py check 1",
+    "check": "The two notes contain no TODO markers, and the Rust starter prints its command list."
+  },
+  {
+    "id": 2,
+    "title": "Scan source text",
+    "summary": "Turn characters into tokens with source positions.",
+    "result": "sprout tokens examples/tokens.sp prints a stable token stream.",
+    "read": [
+      {"label": "Logos guide", "url": "https://docs.rs/logos/latest/logos/", "why": "Token rules and spans for the recommended Rust lexer."},
+      {"label": "Flex manual", "url": "https://westes.github.io/flex/manual/", "why": "Compare a classic lexer generator with your Rust route."},
+      {"label": "C side lab", "url": "https://github.com/Raghav-56/sprout-compiler-lab/blob/main/course-labs/README.md", "why": "Build and inspect the Flex scanner."}
+    ],
+    "steps": [
+      {"id": "dfa", "text": "Draw the accepting states for identifiers, integers, =, and == in work/02-dfa.md."},
+      {"id": "lexer", "text": "Implement the tokens command and emit KIND lexeme lines from examples/tokens.sp."},
+      {"id": "errors", "text": "Reject an invalid character with a source location on standard error."}
+    ],
+    "try": "uv run python lab.py check 2",
+    "check": "The token fixture matches in order, and an invalid character is rejected."
+  },
+  {
+    "id": 3,
+    "title": "Parse programs",
+    "summary": "Choose recursive descent and Pratt, or LALRPOP, then build an AST.",
+    "result": "sprout ast accepts valid programs and rejects broken syntax.",
+    "read": [
+      {"label": "LLVM parser and AST tutorial", "url": "https://llvm.org/docs/tutorial/MyFirstLanguageFrontend/LangImpl02.html", "why": "A compact recursive descent and precedence parser."},
+      {"label": "LALRPOP tutorial", "url": "https://lalrpop.github.io/lalrpop/tutorial/index.html", "why": "Use this if you choose a generated LR parser."},
+      {"label": "C side lab", "url": "https://github.com/Raghav-56/sprout-compiler-lab/blob/main/course-labs/README.md", "why": "Build and inspect a Bison expression parser."}
+    ],
+    "steps": [
+      {"id": "choice", "text": "Record your parser choice and its reason in work/03-parser.md."},
+      {"id": "ast", "text": "Implement the ast command. Show that 2 + 3 * 4 groups multiplication first."},
+      {"id": "syntax", "text": "Reject examples/bad_syntax.sp with a useful location."}
+    ],
+    "try": "uv run python lab.py check 3",
+    "check": "Valid source has a nonempty AST, and malformed source fails."
+  },
+  {
+    "id": 4,
+    "title": "Check names and types",
+    "summary": "Resolve declarations and reject programs that have no valid meaning.",
+    "result": "sprout check accepts a valid program and rejects bad names and types.",
+    "read": [
+      {"label": "Crafting Interpreters, resolving and binding", "url": "https://craftinginterpreters.com/resolving-and-binding.html", "why": "Scope, shadowing, and name resolution."},
+      {"label": "Ariadne diagnostics", "url": "https://docs.rs/ariadne/latest/ariadne/", "why": "Show errors against source spans."}
+    ],
+    "steps": [
+      {"id": "symbols", "text": "Give resolved variables stable IDs and write an example of shadowing in work/04-semantics.md."},
+      {"id": "types", "text": "Implement check for int, bool, calls, and return statements."},
+      {"id": "diagnostics", "text": "Give bad names and type errors a location and a specific message."}
+    ],
+    "try": "uv run python lab.py check 4",
+    "check": "The valid fixture passes; undefined names and wrong return types fail."
+  },
+  {
+    "id": 5,
+    "title": "Run with call frames",
+    "summary": "Interpret the AST with scope and recursive function calls.",
+    "result": "factorial returns 120 and the loop program returns 6.",
+    "read": [
+      {"label": "Crafting Interpreters, functions", "url": "https://craftinginterpreters.com/functions.html", "why": "Function calls and return flow."},
+      {"label": "Course plan, runtime environments", "url": "https://github.com/Raghav-56/sprout-compiler-lab/blob/main/PROJECT_PLAN.md", "why": "Relate frames and scopes to PCIT702 Unit 5."}
+    ],
+    "steps": [
+      {"id": "frames", "text": "Draw two nested factorial call frames in work/05-frames.md."},
+      {"id": "interpreter", "text": "Implement interpret with local slots and an explicit call stack."},
+      {"id": "behavior", "text": "Run factorial, loops, and shadowing examples and explain each variable lookup."}
+    ],
+    "try": "uv run python lab.py check 5",
+    "check": "The AST interpreter returns the expected values for recursion and a loop."
+  },
+  {
+    "id": 6,
+    "title": "Lower to three-address IR",
+    "summary": "Give each source construct a small instruction sequence.",
+    "result": "The IR printer and IR interpreter agree with the AST interpreter.",
+    "read": [
+      {"label": "Course plan, intermediate code", "url": "https://github.com/Raghav-56/sprout-compiler-lab/blob/main/PROJECT_PLAN.md", "why": "Review quadruples, triples, and the chosen IR shape."},
+      {"label": "Cranelift IR builder", "url": "https://docs.rs/cranelift-frontend/latest/cranelift_frontend/struct.FunctionBuilder.html", "why": "See the backend's later input model."}
+    ],
+    "steps": [
+      {"id": "representation", "text": "Define one IR representation and render a short example as quadruples and triples in work/06-ir.md."},
+      {"id": "lower", "text": "Implement ir for constants, branches, calls, and returns."},
+      {"id": "run", "text": "Implement ir-run and compare its result with interpret."}
+    ],
+    "try": "uv run python lab.py check 6",
+    "check": "IR is visible, and the IR interpreter returns 120 and 6."
+  },
+  {
+    "id": 7,
+    "title": "Optimize, then choose a backend",
+    "summary": "Make an observable IR improvement. Native ARM64 execution is the extra finish.",
+    "result": "Optimized IR keeps the same result. Cranelift can run it on the server.",
+    "read": [
+      {"label": "Course plan, optimization", "url": "https://github.com/Raghav-56/sprout-compiler-lab/blob/main/PROJECT_PLAN.md", "why": "Choose the small passes before loop work."},
+      {"label": "Cranelift JIT", "url": "https://docs.rs/cranelift-jit/latest/cranelift_jit/struct.JITModule.html", "why": "Native execution on AArch64."}
+    ],
+    "steps": [
+      {"id": "cfg", "text": "Draw the basic blocks and control-flow edges for examples/loop.sp in work/07-optimization.md."},
+      {"id": "opt", "text": "Implement ir-opt. Show one changed instruction sequence with the same result."},
+      {"id": "native", "text": "If you want native output, implement run --native using Cranelift.", "optional": true}
+    ],
+    "try": "uv run python lab.py check 7",
+    "check": "The core check compares optimized IR with plain IR. Run uv run python lab.py check native for the optional ARM64 path."
+  }
+]
