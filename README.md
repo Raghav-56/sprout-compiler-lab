@@ -4,6 +4,8 @@ Build a small compiler on an ARM Linux server, one unit at a time. The lab tells
 
 The recommended path uses Logos for tokens and a hand-written parser. You can choose LALRPOP for LR parsing or write the lexer by hand. Flex and Bison fit as short C exercises. The stages after parsing use the same AST, interpreter, three-address IR, and optional Cranelift backend. Bun builds and checks the browser UI; uv keeps the Python lab runner in its own environment.
 
+Each unit has a short SVG trace in the browser lab. Step through it, answer the prompt, then reveal the explanation. The diagrams draw on the unit's examples and checks. They run locally and load no image library or remote media.
+
 ## Start on the server
 
 Install Git, [uv](https://docs.astral.sh/uv/getting-started/installation/), [Bun](https://bun.sh/docs/installation), and stable Rust. uv creates the Python environment. For Rust on AArch64 Linux, use the [rustup instructions](https://rust-lang.github.io/rustup/installation/). Clone the repository with your GitHub access, then run:

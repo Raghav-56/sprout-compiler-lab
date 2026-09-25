@@ -59,6 +59,34 @@
           </div>
         </section>
 
+        <section class="panel visual-panel" aria-labelledby="visual-title">
+          <div class="visual-heading">
+            <div>
+              <p class="eyebrow">Trace the idea</p>
+              <h2 id="visual-title"></h2>
+            </div>
+            <span id="visual-count" class="visual-count"></span>
+          </div>
+          <p id="visual-prompt" class="visual-prompt"></p>
+          <div class="visual-canvas">
+            <svg id="visual-svg" role="img" aria-label=""></svg>
+          </div>
+          <div class="visual-bottom">
+            <div class="visual-explanation" aria-live="polite">
+              <strong id="visual-frame-title"></strong>
+              <p id="visual-frame-detail"></p>
+            </div>
+            <div class="visual-controls">
+              <button id="visual-prev" class="subtle-button" type="button" aria-label="Previous diagram step">Previous</button>
+              <button id="visual-next" class="secondary-button" type="button">Next step</button>
+            </div>
+          </div>
+          <div class="visual-answer-line">
+            <button id="visual-reveal" class="answer-button" type="button" aria-controls="visual-answer" aria-expanded="false">Show answer</button>
+            <p id="visual-answer" hidden></p>
+          </div>
+        </section>
+
         <div class="section-grid">
           <section class="panel" aria-labelledby="read-title">
             <div class="panel-head">

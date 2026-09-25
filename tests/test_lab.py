@@ -62,9 +62,11 @@ class LabTests(unittest.TestCase):
             with urlopen(base + "/") as response:
                 page = response.read().decode("utf-8")
             self.assertIn("Sprout compiler lab", page)
+            self.assertIn('id="visual-svg"', page)
             with urlopen(base + "/app.js") as response:
                 script = response.read().decode("utf-8")
             self.assertIn("progress-count", script)
+            self.assertIn("visual-svg", script)
             request = Request(
                 base + "/api/mark",
                 data=json.dumps({"unit": 1, "task": "language", "done": True}).encode("utf-8"),
